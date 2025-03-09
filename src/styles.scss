@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.auth-btn{
+    @apply bg-[#4461F2] text-white text-center rounded-[20px] py-4 px-36 w-full hover:bg-[#3b54d1] transition-all duration-300
+}
+
+.lines{
+           display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 22px 0;
+}
+
+.lines::before,.lines::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ccc;
+        }
+
