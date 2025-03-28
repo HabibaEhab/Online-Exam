@@ -1,0 +1,88 @@
+<section class="mt-8">
+    <h1 class="text-[1.5488rem] font-bold text-black mb-8">Sign Up</h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="mb-8">
+            <input formControlName="username" type="text" id="username"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="User Name" required>
+            @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+                <p class="text-red-500 text-sm mt-1">Username is required.</p>
+            }
+        </div>
+
+        <div class="mb-8">
+            <input formControlName="firstName" type="text" id="fname"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="First Name" required>
+            @if (registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+                <p class="text-red-500 text-sm mt-1">First name is required.</p>
+            }
+        </div>
+
+        <div class="mb-8">
+            <input formControlName="lastName" type="text" id="lname"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="Last Name" required>
+            @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+                <p class="text-red-500 text-sm mt-1">Last name is required.</p>
+            }
+        </div>
+
+        <div class="mb-8">
+            <input formControlName="email" type="email" id="email"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="Email" required>
+            @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                <p class="text-red-500 text-sm mt-1">
+                    @if (registerForm.get('email')?.errors?.['required']) { Email is required. }
+                    @if (registerForm.get('email')?.errors?.['email']) { Enter a valid email. }
+                </p>
+            }
+        </div>
+
+        <div class="mb-8">
+            <input formControlName="password" type="password" id="password"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="Password" required>
+            @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                <p class="text-red-500 text-sm mt-1">
+                    @if (registerForm.get('password')?.errors?.['required']) { Password is required. }
+                    @if (registerForm.get('password')?.errors?.['pattern']) {
+                        Password must be at least 8 characters, include an uppercase letter, a number, and a special
+                        character.
+                    }
+                </p>
+            }
+        </div>
+
+        <div class="mb-8">
+            <input formControlName="rePassword" type="password" id="confirm"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="Confirm Password" required>
+            @if (registerForm.errors?.['mismatch'] && registerForm.get('rePassword')?.touched) {
+                <p class="text-red-500 text-sm mt-1">Passwords do not match.</p>
+            }
+        </div>
+
+        <div class="mb-8">
+            <input formControlName="phone" type="tel" id="phone"
+                class="bg-[#F9F9F9] border-gray-300 shadow-sm text-[#A1A4A9] text-sm rounded-lg focus:ring-[#F04438] focus:border-[#F04438] block w-full p-2.5"
+                placeholder="Phone" required>
+            @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+                <p class="text-red-500 text-sm mt-1">
+                    @if (registerForm.get('phone')?.errors?.['required']) { Phone number is required. }
+                    @if (registerForm.get('phone')?.errors?.['pattern']) { Enter a valid Egyptian phone number. }
+                </p>
+            }
+        </div>
+
+        <div class="flex justify-center mb-10 mt-4">
+            <p>Already have an account?</p> <a routerLink="/signin" class="text-[#4461F2]">Login</a>
+        </div>
+
+        <button type="submit" class="auth-btn">
+            Create Account
+        </button>
+    </form>
+</section>

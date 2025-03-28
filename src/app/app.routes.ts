@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
     {
         path: '',
@@ -12,20 +13,33 @@ export const routes: Routes = [
           {
             path: 'signin',
             loadComponent: () =>
-              import('./features/pages/signin/signin.component').then((m) => m.SigninComponent),
+              import('./core/pages/signin/signin.component').then((m) => m.SigninComponent),
           },
           {
             path: 'register',
             loadComponent: () =>
-              import('./features/pages/register/register.component').then((m) => m.RegisterComponent),
+              import('./core/pages/register/register.component').then((m) => m.RegisterComponent),
           },
     
           {
             path: 'forgotpassword',
             loadComponent: () =>
-              import('./features/pages/forgotpassword/forgotpassword.component').then((m) => m.ForgotpasswordComponent),
+              import('./core/pages/forgotpassword/forgotpassword.component').then((m) => m.ForgotpasswordComponent),
           },
         ],
-      },
+    },
+
+    {
+      path: '',
+      component: BlankLayoutComponent,
+      children: [
+        {
+          path: 'home',
+          loadComponent: () =>
+            import('./features/pages/home/home.component').then((m) => m.HomeComponent),
+            
+        },
+      ] 
+    }    
     
 ];
