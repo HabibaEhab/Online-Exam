@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { AuthAPI } from './base/AuthAPI';
 import { HttpClient } from '@angular/common/http';
 import { AuthEndPoint } from './enums/AuthAPI.endpoints';
@@ -36,7 +36,7 @@ export class AuthLibService implements AuthAPI {
   login(data:LoginData): Observable<LoginResponse>{
     return this.httpClient.post(this.getUrl(AuthEndPoint.LOGIN), data).pipe(
       map((res:any)=>this.authAPIAdaptorService.adapt(res)),
-      catchError((err)=> of(err))
+      catchError((err)=>throwError(() => err))
     )
 
   }
@@ -44,7 +44,7 @@ export class AuthLibService implements AuthAPI {
   register(data:RegisterData): Observable<LoginResponse>{
     return this.httpClient.post(this.getUrl(AuthEndPoint.REGISTER), data).pipe(
       map((res:any)=>this.authAPIAdaptorService.adapt(res)),
-      catchError((err)=> of(err))
+      catchError((err)=>throwError(() => err))
     )
 
   }

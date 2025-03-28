@@ -15,7 +15,9 @@ export class SigninComponent {
   private readonly authLibService = inject(AuthLibService);
   private readonly router = inject(Router);
 
- 
+   isLoading : boolean = false;
+   msgError:string = "";
+   isSuccess:string = "";
 
   loginForm:FormGroup = new FormGroup({
       
@@ -27,6 +29,9 @@ export class SigninComponent {
  
 
   login(){
+   if(this.loginForm.valid){
+
+    this.isLoading =true;
     this.authLibService.login(this.loginForm.value).subscribe({
       next:(res)=>{
         console.log(res);
@@ -43,15 +48,24 @@ export class SigninComponent {
              this.router.navigate(['/home']);
             }, 500)
 
-          
+            this.isSuccess = res.message;
           }
-
+          this.isLoading = false;
       },
       error:(err)=>{
         console.log(err);
+        this.msgError = err.error.message;
+        this.isLoading = false;
+        
       }
     })
+
+   }
+   else{
+    this.loginForm.markAllAsTouched();
   }
+  }
+
 
  
 

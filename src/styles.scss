@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'ngx-toastr/toastr';
+
 .auth-btn{
     @apply bg-[#4461F2] text-white text-center rounded-[20px] py-4 px-36 w-full hover:bg-[#3b54d1] transition-all duration-300
 }

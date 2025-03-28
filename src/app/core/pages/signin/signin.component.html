@@ -39,5 +39,14 @@
         <button type="submit" class="auth-btn" [disabled]="loginForm.invalid">
             Sign In
         </button>
+
+        @if(msgError){
+            <p class="bg-red-500 text-white px-2 py-4 border">{{msgError}}</p>
+          }
+    
+         @if(isSuccess){
+            <p class="bg-blue-500 text-white px-2 py-4 border">Logged in sucessfully</p>
+          }
+    
     </form>
 </section>

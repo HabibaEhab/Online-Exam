@@ -15,6 +15,10 @@ export class RegisterComponent {
   private readonly authLibService =inject(AuthLibService);
   private readonly router = inject(Router);
 
+  isLoading : boolean = false;
+   msgError:string = "";
+   isSuccess:string = "";
+
 
   registerForm:FormGroup = new FormGroup({
     username:new FormControl(null, [Validators.required] ),
@@ -30,23 +34,30 @@ export class RegisterComponent {
   
 
   register(){
-    this.authLibService.register(this.registerForm.value).subscribe({
-      next:(res)=>{
-        console.log(res);
-        if(res.message === "success")
-          {
-            setTimeout(()=>{
-              this.router.navigate(['/signin']);
-            }, 500)
+    if(this.registerForm.valid){
+      this.isLoading=true;
+      this.authLibService.register(this.registerForm.value).subscribe({
+        next:(res)=>{
+          console.log(res);
+          if(res.message === "success")
+            {
+              setTimeout(()=>{
+                this.router.navigate(['/signin']);
+              }, 500)
+  
+               this.isSuccess = res.message
+            }
+            this.isLoading = false;
+        },
+        error:(err)=>{
+          console.log(err);
+          this.msgError = err.error.message
+          this.isLoading = false;
+        }
+      })
 
-            
-          }
-
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
+    }
+   
   }
 
   confirmPassword(group : AbstractControl){
